@@ -19,10 +19,5 @@ jobs:
 
       
       - name: Show databases
-        run: mysql -uroot -prootpassword -h 127.0.0.1 -e "SHOW DATABASES;"  # Show databases
+        run: mysql -uroot -prootpassword -e "SHOW DATABASES;"  # Show databases
       
-      - name: Show School Database Tables
-        run: mysql -uroot -prootpassword -e "USE school; SHOW TABLES;" # Show tables
-      
-      - name: Display Table content
-        run: mysql -uroot -prootpassword -e "USE school; SHOW TABLES; SELECT * FROM students;"  # Display table content
