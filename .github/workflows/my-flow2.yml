@@ -12,6 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Start MySQL
+        run: service mysql start  # Ensure MySQL is started
+
+
       - run: mysql -uroot -prootpassword -e "SHOW DATABASES;"  # Show databases
       - run: mysql -uroot -prootpassword -e "USE school; SHOW TABLES;" # Show tables
       - run: mysql -uroot -prootpassword -e "USE school; SHOW TABLES; SELECT * FROM students" # Display table content
