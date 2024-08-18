@@ -1,15 +1,15 @@
-name: Run Docker Image and Show Databases
+name: Run Docker Image, Show Databases, and Tables
 
 on: [push]
 
 jobs:
   run-docker:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        
+
       - name: Set up Docker
         uses: docker/setup-buildx-action@v2
 
@@ -22,9 +22,20 @@ jobs:
         run: sleep 30  # Wait time may vary depending on the image and environment
 
       - name: Show databases
+        id: show-databases
         run: |
-          docker exec mysql-container mysql -uroot -prootpassword -e "SHOW DATABASES;"
-          
+          docker exec mysql-container mysql -uroot -prootpassword -e "SHOW DATABASES;" > databases.txt
+          cat databases.txt
+
+      - name: List tables in each database
+        run: |
+          while read dbname; do
+            if [ "$dbname" != "Database" ]; then
+              echo "Tables in database: $dbname"
+              docker exec mysql-container mysql -uroot -prootpassword -e "USE $dbname; SHOW TABLES;"
+            fi
+          done < databases.txt
+
       - name: Clean up
         run: |
           docker stop mysql-container
