@@ -31,7 +31,7 @@ jobs:
         run: docker exec mysql-container mysql -uroot -prootpassword -e "USE school; SHOW TABLES;"
         
       - name: Display Table content
-        run: docker exec mysql-container mysql -uroot -prootpassword -e "USE school; SHOW TABLES; SELECT * FROM STUDENTS;"
+        run: docker exec mysql-container mysql -uroot -prootpassword -e "USE school; SHOW TABLES; SELECT * FROM students;"
 
       - name: Clean up
         run: |
