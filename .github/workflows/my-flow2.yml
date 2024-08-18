@@ -11,9 +11,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
-      - run: docker exec mysql-container mysql -uroot -prootpassword -e "SHOW DATABASES;"  # Show databases
-      
-      - run: docker exec mysql-container mysql -uroot -prootpassword -e "USE school; SHOW TABLES;"  # Show tables
-      
-      - run: docker exec mysql-container mysql -uroot -prootpassword -e "USE school; SHOW TABLES; SELECT * FROM students;"  # Display table content
+
+      - run: mysql -uroot -prootpassword -e "SHOW DATABASES;"  # Show databases
+      - run: mysql -uroot -prootpassword -e "USE school; SHOW TABLES;" # Show tables
+      - run: mysql -uroot -prootpassword -e "USE school; SHOW TABLES; SELECT * FROM students" # Display table content
