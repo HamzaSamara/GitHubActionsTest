@@ -27,9 +27,12 @@ jobs:
           docker exec mysql-container mysql -uroot -prootpassword -e "SHOW DATABASES;"
           
 
-      - name: Show School Database Tables;
-        run: docker exec mysql-container mysql -uroot -prootpassword -e "USE SCHOOL; SHOW TABLES; SELECT * FROM STUDENTS;"
+      - name: Show School Database Tables
+        run: docker exec mysql-container mysql -uroot -prootpassword -e "USE school; SHOW TABLES;"
         
+      - name: Display Table content
+        run: docker exec mysql-container mysql -uroot -prootpassword -e "USE school; SHOW TABLES; SELECT * FROM STUDENTS;"
+
       - name: Clean up
         run: |
           docker stop mysql-container
