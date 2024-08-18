@@ -12,11 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-
-
-      - name: start
-        run:  /etc/init.d/mysql start
-
       
       - name: Wait for MySQL to start
         run: sleep 90  # Adjust the sleep time as necessary
@@ -24,7 +19,7 @@ jobs:
 
       
       - name: Show databases
-        run: mysql -uroot -prootpassword -e "SHOW DATABASES;"  # Show databases
+        run: mysql -uroot -prootpassword -h 127.0.0.1 -e "SHOW DATABASES;"  # Show databases
       
       - name: Show School Database Tables
         run: mysql -uroot -prootpassword -e "USE school; SHOW TABLES;" # Show tables
