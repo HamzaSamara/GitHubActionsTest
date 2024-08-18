@@ -14,8 +14,18 @@ jobs:
 
       - name: Start MySQL
         run: mysqld &  # Start MySQL in the background
+      
+      - name: Wait for MySQL to start
+        run: sleep 20  # Adjust the sleep time as necessary
+      
+      - name: Check MySQL Status
+        run: mysqladmin -uroot -prootpassword ping  # Check MySQL status
 
-
-      - run: mysql -uroot -prootpassword -e "SHOW DATABASES;"  # Show databases
-      - run: mysql -uroot -prootpassword -e "USE school; SHOW TABLES;" # Show tables
-      - run: mysql -uroot -prootpassword -e "USE school; SHOW TABLES; SELECT * FROM students" # Display table content
+      - name: Show databases
+        run: mysql -uroot -prootpassword -e "SHOW DATABASES;"  # Show databases
+      
+      - name: Show School Database Tables
+        run: mysql -uroot -prootpassword -e "USE school; SHOW TABLES;" # Show tables
+      
+      - name: Display Table content
+        run: mysql -uroot -prootpassword -e "USE school; SHOW TABLES; SELECT * FROM students;"  # Display table content
