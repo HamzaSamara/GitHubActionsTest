@@ -24,18 +24,12 @@ jobs:
       - name: Show databases
         id: show-databases
         run: |
-          docker exec mysql-container mysql -uroot -prootpassword -e "SHOW DATABASES;" > databases.txt
-          cat databases.txt
+          docker exec mysql-container mysql -uroot -prootpassword -e "SHOW DATABASES;"
+          
 
-      - name: List tables in each database
-        run: |
-          while read dbname; do
-            if [ "$dbname" != "Database" ]; then
-              echo "Tables in database: $dbname"
-              docker exec mysql-container mysql -uroot -prootpassword -e "USE $dbname; SHOW TABLES;"
-            fi
-          done < databases.txt
-
+      - name: Show School Database Tables;
+        run: docker exec mysql-container mysql -uroot -prootpassword -e "USE SCHOOL; SHOW TABLES; SELECT * FROM STUDENTS;"
+        
       - name: Clean up
         run: |
           docker stop mysql-container
