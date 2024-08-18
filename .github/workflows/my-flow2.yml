@@ -18,9 +18,6 @@ jobs:
       - name: Wait for MySQL to start
         run: sleep 20  # Adjust the sleep time as necessary
       
-      - name: Check MySQL Status
-        run: mysqladmin -uroot -prootpassword ping  # Check MySQL status
-
       - name: Show databases
         run: mysql -uroot -prootpassword -e "SHOW DATABASES;"  # Show databases
       
