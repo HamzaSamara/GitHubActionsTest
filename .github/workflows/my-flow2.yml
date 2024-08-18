@@ -1,0 +1,19 @@
+name: Run Docker Image, Show Databases, and Tables
+
+on:
+  push:
+    paths: .github/workflows/my-flow2.yml
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: hamzasamara/mysql-01
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - run: docker exec mysql-container mysql -uroot -prootpassword -e "SHOW DATABASES;"  # Show databases
+      
+      - run: docker exec mysql-container mysql -uroot -prootpassword -e "USE school; SHOW TABLES;"  # Show tables
+      
+      - run: docker exec mysql-container mysql -uroot -prootpassword -e "USE school; SHOW TABLES; SELECT * FROM students;"  # Display table content
