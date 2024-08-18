@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Start MySQL
-        run: systemctl mysql start  # Ensure MySQL is started
+        run: mysqld &  # Start MySQL in the background
 
 
       - run: mysql -uroot -prootpassword -e "SHOW DATABASES;"  # Show databases
