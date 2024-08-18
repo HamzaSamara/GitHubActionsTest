@@ -11,12 +11,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Start MySQL
-        run: mysqld &  # Start MySQL in the background
       
       - name: Wait for MySQL to start
-        run: sleep 20  # Adjust the sleep time as necessary
+        run: sleep 90  # Adjust the sleep time as necessary
       
       - name: Show databases
         run: mysql -uroot -prootpassword -e "SHOW DATABASES;"  # Show databases
