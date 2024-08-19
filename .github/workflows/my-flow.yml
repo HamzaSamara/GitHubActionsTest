@@ -1,6 +1,5 @@
 name: Run Docker Image, Show Databases, and Tables
 
-
 on:
   push:
     paths: .github/workflows/my-flow.yml
@@ -20,6 +19,14 @@ jobs:
         run: |
           docker pull hamzasamara/mysql-01
           docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=rootpassword hamzasamara/mysql-01
+
+      - name: Wait for MySQL to be ready
+        run: |
+          until docker exec mysql-container mysqladmin ping -uroot -prootpassword --silent; do
+            echo "Waiting for MySQL to be ready..."
+            sleep 3
+          done
+
 
       - name: Show databases
         id: show-databases
