@@ -21,9 +21,6 @@ jobs:
           docker pull hamzasamara/mysql-01
           docker run -d --name mysql-container -e MYSQL_ROOT_PASSWORD=rootpassword hamzasamara/mysql-01
 
-      - name: Wait for MySQL to start
-        run: sleep 30  # Wait time may vary depending on the image and environment
-
       - name: Show databases
         id: show-databases
         run: |
